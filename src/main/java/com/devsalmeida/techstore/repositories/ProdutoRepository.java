@@ -13,6 +13,8 @@ public interface ProdutoRepository extends CrudRepository<Produto,Long> {
 
     Optional<Produto> findById(Long id);
 
+    boolean existsByNome(String nome);
+
     @Override
     void delete(Produto produto);
 

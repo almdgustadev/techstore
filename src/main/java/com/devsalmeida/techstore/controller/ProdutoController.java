@@ -2,6 +2,7 @@ package com.devsalmeida.techstore.controller;
 
 import com.devsalmeida.techstore.entities.Produto;
 import com.devsalmeida.techstore.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class ProdutoController {
     }
 
     @PostMapping(value = "/cadastrar-produto")
-    public @ResponseBody Produto cadastrarProduto(@RequestBody Produto produto){
+    public @ResponseBody Produto cadastrarProduto(@Valid @RequestBody Produto produto){
         return produtoService.cadastrarProduto(produto);
     }
 

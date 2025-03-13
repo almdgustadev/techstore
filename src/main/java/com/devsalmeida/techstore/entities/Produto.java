@@ -1,6 +1,8 @@
 package com.devsalmeida.techstore.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 import java.util.Objects;
 
@@ -12,11 +14,16 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "O nome do produto é obrigatório!")
     private String nome;
 
     @Column(columnDefinition = "TEXT")
     private String descricao;
+
+    @Positive(message = "O valor do produto deve ser maior que zero!")
     private double preco;
+
+    @Positive(message = "A quantidade do produto em estoque deve ser maior que zero!")
     private Integer quantidadeEstoque;
 
     public Produto() {}

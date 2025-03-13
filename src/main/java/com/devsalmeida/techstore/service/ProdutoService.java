@@ -30,6 +30,9 @@ public class ProdutoService {
 
     @Transactional
     public Produto cadastrarProduto(Produto produto){
+        if(produtoRepository.existsByNome(produto.getNome())){
+            throw new RuntimeException("Já existe um produto com este nome!");
+        }
         return produtoRepository.save(produto);
     }
 }
