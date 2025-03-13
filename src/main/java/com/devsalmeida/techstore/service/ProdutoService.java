@@ -5,6 +5,8 @@ import com.devsalmeida.techstore.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -16,7 +18,18 @@ public class ProdutoService {
 
     //criando metodo para passar para o controller
     @Transactional(readOnly = true)
-    public List<Produto> findAll(){
-        return produtoRepository.findAll();
+    public List<Produto> listarProdutos(){
+        List<Produto> result = produtoRepository.findAll();
+        if (result.isEmpty()){
+            throw new RuntimeException();
+        }else {
+            return result;
+        }
+
+    }
+
+    @Transactional
+    public Produto cadastrarProduto(Produto produto){
+        return produtoRepository.save(produto);
     }
 }
