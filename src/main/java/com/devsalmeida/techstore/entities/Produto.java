@@ -2,13 +2,15 @@ package com.devsalmeida.techstore.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_produto")
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private String nome;
 
@@ -19,7 +21,7 @@ public class Produto {
 
     public Produto() {}
 
-    public Produto(Long id, String nome, String descricao, double preco, Integer quantidadeEstoque) {
+    public Produto(Integer id, String nome, String descricao, double preco, Integer quantidadeEstoque) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -27,11 +29,11 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,5 +67,18 @@ public class Produto {
 
     public void setQuantidadeEstoque(Integer quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
