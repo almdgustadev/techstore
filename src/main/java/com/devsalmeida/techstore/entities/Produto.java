@@ -12,7 +12,7 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long codigo;
 
     @NotBlank(message = "O nome do produto é obrigatório!")
     private String nome;
@@ -28,20 +28,20 @@ public class Produto {
 
     public Produto() {}
 
-    public Produto(Integer id, String nome, String descricao, double preco, Integer quantidadeEstoque) {
-        this.id = id;
+    public Produto(Long codigo, String nome, String descricao, double preco, Integer quantidadeEstoque) {
+        this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public Integer getId() {
-        return id;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -81,11 +81,11 @@ public class Produto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id);
+        return Objects.equals(codigo, produto.codigo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(codigo);
     }
 }
