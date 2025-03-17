@@ -16,7 +16,6 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    //criando metodo para passar para o controller
     @Transactional(readOnly = true)
     public List<Produto> listarProdutos(){
         List<Produto> result = produtoRepository.findAll();
@@ -44,7 +43,7 @@ public class ProdutoService {
     @Transactional
     public Produto alterarProduto(Produto produto){
         return produtoRepository.save(produto);
-    } // ver se necessita do ID obrigatoriamente para alterar
+    }
 
     @Transactional
     public void deletarProduto(Produto produto){
