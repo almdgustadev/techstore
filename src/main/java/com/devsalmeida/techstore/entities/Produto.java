@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo")
     private Long codigo;
 
     @NotBlank(message = "O nome do produto é obrigatório!")
@@ -21,14 +23,15 @@ public class Produto {
     private String descricao;
 
     @Positive(message = "O valor do produto deve ser maior que zero!")
-    private double preco;
+    @Column(scale = 2)
+    private BigDecimal preco;
 
     @Positive(message = "A quantidade do produto em estoque deve ser maior que zero!")
     private Integer quantidadeEstoque;
 
     public Produto() {}
 
-    public Produto(Long codigo, String nome, String descricao, double preco, Integer quantidadeEstoque) {
+    public Produto(Long codigo, String nome, String descricao, BigDecimal preco, Integer quantidadeEstoque) {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
@@ -60,11 +63,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 
