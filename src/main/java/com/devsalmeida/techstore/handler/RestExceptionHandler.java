@@ -10,18 +10,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
-    private ResponseEntity<String> productNotFound(ProductNotFoundException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto não encontrado!");
+    private ResponseEntity<String> productNotFound(ProductNotFoundException productNotFoundException){
+        return new ResponseEntity<>(productNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EmptyStockException.class)
-    private ResponseEntity<String> emptyStock(EmptyStockException exception){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não há produtos em estoque!");
+    private ResponseEntity<String> emptyStock(EmptyStockException emptyStockException){
+        return new ResponseEntity<>(emptyStockException.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(ProductSaveException.class)
-    private ResponseEntity<String> sameName(ProductSaveException exception){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe um produto cadastrado com este nome!");
+    private ResponseEntity<String> sameName(ProductSaveException sameNameException){
+        return new ResponseEntity<>(sameNameException.getMessage(), HttpStatus.CONFLICT);
     }
 
 }
